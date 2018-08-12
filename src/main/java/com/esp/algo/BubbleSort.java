@@ -1,5 +1,10 @@
 package com.esp.algo;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
 public class BubbleSort implements SortAlgo {
 
 	@Override
