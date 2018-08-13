@@ -90,7 +90,7 @@ There are three ways we can autowire the SortAlgo object.
   ### Bean Scope
   A Spring bean has the following 4 scopes:
   
-  __1. Singleton (Default) :__ One instance per Srping context.  
+  __1. Singleton (Default) :__ One instance per Spring context. This is different than the Singleton design pattern, where only a single        instance is created per JVM.  
   __2. Prototype :__ New bean whenever requested.    
   __3. Request :__ One bean per HTTP request.  
   __4. Session :__ One bean per HTTP session.  
