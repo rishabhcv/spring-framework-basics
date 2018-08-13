@@ -1,10 +1,12 @@
 package com.esp.algo;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
+//@Primary
+@Qualifier("bubble")
 public class BubbleSort implements SortAlgo {
 
 	@Override
