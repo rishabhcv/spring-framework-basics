@@ -15,7 +15,7 @@ We have to ask some questions like :
 ### Types of Autowiring 
 There are three ways we can autowire the SortAlgo object.
 
-	#### 1. Property Autowiring 
+  #### 1. Property Autowiring 
   (Similar to Setter Autowriring)
   
   ``` java
@@ -35,7 +35,7 @@ There are three ways we can autowire the SortAlgo object.
   *log* : Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSort'
   
   #### 3. Contructor Autowiring
-	``` java
+  ``` java
   @Autowired
 	public BinarySearchImpl(SortAlgo sortAlgo) {
 		this.sortAlgo = sortAlgo;
