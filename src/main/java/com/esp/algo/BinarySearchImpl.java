@@ -7,12 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+@PropertySource("classpath:app.properties")
 public class BinarySearchImpl implements SearchAlgorithm{
 	
 	Logger log = LoggerFactory.getLogger(BinarySearchImpl.class);
@@ -39,6 +42,13 @@ public class BinarySearchImpl implements SearchAlgorithm{
 /*	public void setSortAlgo(SortAlgo sortAlgo) {
 		this.sortAlgo = sortAlgo;
 	}*/
+	
+	@Value("${external.service.url}")
+	private String url;
+	
+	public String getUri() {
+		return this.url;
+	}
 
 	@Override
 	public int search(int[] numbers, int searchNo) {

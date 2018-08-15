@@ -17,7 +17,7 @@ public class SpringBasicApplication {
 		System.out.println(binarySearch);
 		BinarySearchImpl binarySearch1 = ctx.getBean(BinarySearchImpl.class);
 		System.out.println(binarySearch1);
-		
+		System.out.println(binarySearch.getUri());
 		int result = binarySearch.search(new int[] {1, 5, 7}, 5);
 		System.out.println(result);	
 	}
