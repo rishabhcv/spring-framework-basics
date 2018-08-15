@@ -170,3 +170,16 @@ In the BinarySearchImpl example, there are three ways we can autowire the SortAl
    __3. *@Singelton* :__ It's equivalent to the Singleton scope type in Spring.       
    __4. *@Scope* :__ It's similar to *@Scope* in Spring.       
    
+   ### What is the difference between @Component, @Service and @Repository annotations?
+
+   At the core, all of these define spring beans. However, you can further classify them based on the layer you are using them. 
+   - @Component - Generic Component
+   - @Repository - encapsulating storage, retrieval, and search behavior typically from a relational database
+   - @Service - Business Service Facade
+   - @Controller - Controller in MVC pattern        
+
+     By using a specific annotation, you are giving more information to the framework about your intentions. @Component serves as a          generic stereotype for any Spring-managed component; whereas, @Repository, @Service, and @Controller serve as specializations of        @Component for more specific use cases (e.g., in the persistence, service, and presentation layers, respectively). What this means      is that you can annotate your component classes with @Component, but by annotating them with @Repository, @Service, or @Controller      instead, your classes are more properly suited for processing by tools or associating with aspects. For example, these stereotype        annotations make ideal targets for pointcuts. Of course, it is also possible that @Repository, @Service, and @Controller may carry      additional semantics in future releases of the Spring Framework. Thus, if you are making a decision between using @Component or          @Service for your service layer, @Service is clearly the better choice. Similarly, as stated above, @Repository is already              supported as a marker for automatic exception translation in your persistence layer.  
+
+   ## Useful Articles
+   1. [Spring FAQs](https://github.com/rishabhcv/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ#q---can-we-use-component-annotation-instead-of-service-for-business-services)     
+   2. [BeanFactory vs ApplicationContext](https://javarevisited.blogspot.com/2012/11/difference-between-beanfactory-vs-applicationcontext-spring-framework.html)
