@@ -167,7 +167,7 @@ In the BinarySearchImpl example, there are three ways we can autowire the SortAl
    
    __1. *@Named* :__ It's similar to *@Component* & *@Qualifier*.     
    __2. *@Inject* :__ It's the equivalent of *@Autowired*.    
-   __3. *@Singelton* :__ It's equivalent to the Singleton scope type in Spring.       
+   __3. *@Singleton* :__ It's equivalent to the Singleton scope type in Spring.       
    __4. *@Scope* :__ It's similar to *@Scope* in Spring.       
    
    ### What is the difference between @Component, @Service and @Repository annotations?
