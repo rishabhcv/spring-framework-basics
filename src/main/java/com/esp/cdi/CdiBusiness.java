@@ -15,5 +15,16 @@ public class CdiBusiness {
 	public void setDummyDao(DummyDao dummyDao) {
 		this.dummyDao = dummyDao;
 	}
+	
+	public int greatestInt() {
+		int[] data = dummyDao.getData();
+		int greatest= Integer.MIN_VALUE;
+		for(int ar : data) {
+			if(ar>greatest) {
+				greatest=ar;
+			}
+		}
+		return greatest;
+	}
 
 }

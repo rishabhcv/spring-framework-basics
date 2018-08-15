@@ -6,7 +6,6 @@ import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.PropertySource;
@@ -21,7 +20,6 @@ public class BinarySearchImpl implements SearchAlgorithm{
 	Logger log = LoggerFactory.getLogger(BinarySearchImpl.class);
 	
 	@Autowired
-	@Qualifier("quick")
 	private SortAlgo sortAlgo;
 	
 	@PostConstruct
@@ -53,10 +51,8 @@ public class BinarySearchImpl implements SearchAlgorithm{
 	@Override
 	public int search(int[] numbers, int searchNo) {
 		System.out.println(sortAlgo);
-		int[] sortedNumbers = sortAlgo.sort(numbers);
+		sortAlgo.sort(numbers);
 		return 5;
 	}
 	
-	
-
 }
