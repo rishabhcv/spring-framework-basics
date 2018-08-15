@@ -1,22 +1,25 @@
-# spring-loose-coupling
+# Spring Boot Introduction
+To understand what we're getting into, please read this article by Ranga Karanam:
+[Spring Boot vs. Spring MVC vs. Spring: How Do They Compare?](https://dzone.com/articles/spring-boot-vs-spring-mvc-vs-spring-how-do-they-compare)        
+
 In this project, we have annotated our classes and some methods/properties using some Spring annotations, which work their magic 
-and implement Inversion of Control. We use the IoC conatiner ApplicationContext in this case, which uses the Dependency Injection
-implementation of IoC
+and implement Inversion of Control. We use the IoC container ApplicationContext in this case, which uses the Dependency Injection
+implementation of IoC.
 
 ## What did we do?
 We have to ask some questions like :
- 1. What are the beans? Annotate using *@Component*/*@Component("name")*
+ 1. What are the beans in our project? Annotate using *@Component*/*@Component("name")*
  2. What are the dependencies of a bean? Annotate using *@Autowired*
  3. Where to look for the dependencies? Annotate using *@ComponentScan(basePackages ={com.esp.algo})*. If the dependencies are in
     the same package as the Application class, which is highly unlikely, then we don't need to add the *@ComponentScan* annotation.
- 4. We annotated our main class with *@SpringBootApplication* 
- 5. In case of multiple beans for the same autowired object, we use *@Primary* to make a bean the primary bean for injection.
+ 4. How to make the class with the main method, a Spring Boot Application? We annotated our main class with *@SpringBootApplication*   
+ 5. In case of multiple beans for the same autowired object, how do we tell Spring which bean to use? We use *@Primary* to make a bean       the primary bean for injection. We can also use *@Qualifier* to do the same. 
 
 ### Types of Autowiring 
-There are three ways we can autowire the SortAlgo object.
+In the BinarySearchImpl example, there are three ways we can autowire the SortAlgo object.
 
-  #### 1. Property Autowiring 
-  (Similar to Setter Autowriring)
+  #### 1. Property/Type Autowiring 
+  (Similar to Setter Autowiring)
   
   ``` java
   @Autowired
@@ -34,7 +37,7 @@ There are three ways we can autowire the SortAlgo object.
   ```
   *log* : Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSort'
   
-  #### 3. Contructor Autowiring
+  #### 3. Constructor Autowiring
   ``` java
   @Autowired
 	public BinarySearchImpl(SortAlgo sortAlgo) {
@@ -43,7 +46,7 @@ There are three ways we can autowire the SortAlgo object.
   ```
   *log* :  Autowiring by type from bean name 'binarySearchImpl' via constructor to bean named 'bubbleSort'
 
-  ### Ways in which we can Autowire beans
+  ### Ways in which we can Autowire Beans
   
   #### 1. Autowiring by Name
   
@@ -104,7 +107,7 @@ There are three ways we can autowire the SortAlgo object.
   @Scope("prototype")
   public class BinarySearchImpl implements SearchAlgorithm
   ```
-  The above example of hard-coding is a bad practice and should be avoided.
+  *The above example of hard-coding is a bad practice and should be avoided.*       
   
   ```java
   @Component
@@ -116,7 +119,7 @@ There are three ways we can autowire the SortAlgo object.
   #### The Scope Dilemma
   
   In our project under the package *com.esp.scope*, you can find two beans called __PersonDao.java__ and __JdbcConnection.java__.
-  Now, we know that the default scope of both our beans will be Singelton. *JdbcConnection* is being autowired in *PersonDao*. What 
+  Now, we know that the default scope of both our beans will be Singleton. *JdbcConnection* is being autowired in *PersonDao*. What 
   if we explicitly made the *JdbcConnection* bean a Prototype bean? We will still get only one instance of it, even if we made two         instances of *PersonDao*. To overcome this problem we use something called *proxyMode*.
   
   ```java
@@ -124,3 +127,46 @@ There are three ways we can autowire the SortAlgo object.
   @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
   public class JdbcConnection
   ```
+  #### *@PostConstruct* and *@PreDestroy* Annotations With CDI Managed Bean Classes
+  
+  __1. To Initialize a Managed Bean Using the *@PostConstruct* Annotation__      
+       _javax.annotation.PostConstruct_       
+       In the managed bean class or any of its superclasses, define a method that performs the initialization that you require. When the        managed bean is injected into a component, CDI calls the method after all injection has occurred and after all                          initializers have been called.
+       
+       ```java
+       	@PostConstruct
+	public void init() {
+	  log.info("init method called");
+	}       
+       ```
+  
+  __2. To Prepare for the Destruction of a Managed Bean Using the *@PreDestroy* Annotation__        
+       _javax.annotation.PreDestroy_         
+       Preparing for the destruction of a managed bean specifies the lifecycle call back method that signals that an application                component is about to be destroyed by the container. In this method, perform any cleanup that is required before the bean is            destroyed, such as releasing a resource that the bean has been holding.
+       
+        ```java
+	@PreDestroy
+	public void destruct() {
+	  log.info("destruct method called");
+	}
+       
+        ```
+   #### Using CDI (Contexts and Dependency Injection) Annotations
+   CDI is a set of services that, used together, make it easy for developers to use enterprise beans along with JavaServer Faces            technology in web applications. *Spring provides an implementation for CDI just like Hibernate does for JPA.* So CDI is a guideline or    an interface. The most fundamental services provided by CDI are as follows:                  
+   Contexts: The ability to bind the lifecycle and interactions of stateful components to well-defined but extensible lifecycle contexts  
+   Dependency injection: The ability to inject components into an application in a typesafe way, including the ability to choose at        deployment time which implementation of a particular interface to inject. Adding the dependency in your pom.xml:        
+  
+       <dependency>
+	      <groupId>javax.inject</groupId>
+	      <artifactId>javax.inject</artifactId>
+	      <version>1</version>
+       </dependency>
+       
+   ##### CDI Annotations
+   These annotations can be used in conjunction with the Spring annotations. There's an example using a couple of these annotations in      this repository which is just meant to give us an idea about what CDI is and how Spring is based around it.     
+   
+   __1. *@Named* :__ It's similar to *@Component* & *@Qualifier*.     
+   __2. *@Inject* :__ It's the equivalent of *@Autowired*.    
+   __3. *@Singelton* :__ It's equivalent to the Singleton scope type in Spring.       
+   __4. *@Scope* :__ It's similar to *@Scope* in Spring.       
+   
