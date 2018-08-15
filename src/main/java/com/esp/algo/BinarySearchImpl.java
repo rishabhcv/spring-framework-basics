@@ -1,5 +1,10 @@
 package com.esp.algo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -10,9 +15,21 @@ import org.springframework.stereotype.Component;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class BinarySearchImpl implements SearchAlgorithm{
 	
+	Logger log = LoggerFactory.getLogger(BinarySearchImpl.class);
+	
 	@Autowired
 	@Qualifier("quick")
 	private SortAlgo sortAlgo;
+	
+	@PostConstruct
+	public void init() {
+		log.info("init method called");
+	}
+	
+	@PreDestroy
+	public void destruct() {
+		log.info("destruct method called");
+	}
 	
 /*	@Autowired
 	public BinarySearchImpl(SortAlgo sortAlgo) {
@@ -29,5 +46,7 @@ public class BinarySearchImpl implements SearchAlgorithm{
 		int[] sortedNumbers = sortAlgo.sort(numbers);
 		return 5;
 	}
+	
+	
 
 }

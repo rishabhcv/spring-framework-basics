@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.esp.scope.PersonDao;
 
 @SpringBootApplication
-@ComponentScan(basePackages= {"com.esp.scope"})
+@ComponentScan("com.esp.scope")
 public class SpringScopeApplication {
 
 	private static Logger log = LoggerFactory.getLogger(SpringScopeApplication.class);
