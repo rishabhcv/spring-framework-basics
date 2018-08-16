@@ -1,10 +1,10 @@
-# Spring Boot Introduction
+# Spring Introduction
 To understand what we're getting into, please read this article by Ranga Karanam:
 [Spring Boot vs. Spring MVC vs. Spring: How Do They Compare?](https://dzone.com/articles/spring-boot-vs-spring-mvc-vs-spring-how-do-they-compare)        
 
 In this project, we have annotated our classes and some methods/properties using some Spring annotations, which work their magic 
 and implement Inversion of Control. We use the IoC container ApplicationContext in this case, which uses the Dependency Injection
-implementation of IoC.
+implementation of IoC. The classes which load the ApplicationContext have been annotated with *@SpringBootApplication* but that's the only thing from Spring Boot that we're leveraging here. This project was created using the [Spring Initializr](https://start.spring.io/). 
 
 ## What did we do?
 We have to ask some questions like :
